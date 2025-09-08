@@ -1,14 +1,19 @@
+// Load environment variables if PORT isn't set (development mode)
 if (!process.env.PORT) {
+  // Loads variables from .env file
   require('dotenv').config()
   process.env.NODE_ENV = "dev"
 }
 
 const express = require('express');
 const path = require('path');
+// Serves favicon.ico file, currently unused
 const favicon = require('serve-favicon');
+// HTTP request logger
 const logger = require('morgan');
 const cookieParser = require('cookie-parser');
 const bodyParser = require('body-parser');
+// Allows PUT/DELETE via forms
 const methodOverride = require('method-override')
 
 const app = express();
