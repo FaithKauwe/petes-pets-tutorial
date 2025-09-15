@@ -7,7 +7,7 @@ block content
       legend New Pet
         //- new-pet is id for the whole form so JS can target 
         //- remove post method bc AJAX request in JS will handle     
-      form(action="#", id="new-pet")
+      form(action="#", id="new-pet", enctype="multipart/form-data")
         .form-group
             label Name*
             input.form-control(name="name" required)
@@ -17,12 +17,15 @@ block content
         .form-group
             label Species*
             input.form-control(name="species" required)
+        //- .form-group
+        //-     label Rectangular Image URL*
+        //-     input.form-control(name="picUrl" required type="url")
+        //- .form-group
+        //-     label Square Image URL*
+        //-     input.form-control(name="picUrlSq" required type="url")   
         .form-group
-            label Rectangular Image URL*
-            input.form-control(name="picUrl" required type="url")
-        .form-group
-            label Square Image URL*
-            input.form-control(name="picUrlSq" required type="url")   
+            label Avatar*
+            input.form-control(name="avatar" type="file" required)
         .form-group
             label Favorite Food*
             input.form-control(name="favoriteFood" required)
