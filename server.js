@@ -5,6 +5,7 @@ if (!process.env.PORT) {
   process.env.NODE_ENV = "dev"
 }
 
+
 const express = require('express');
 const path = require('path');
 // Serves favicon.ico file, currently unused
@@ -15,7 +16,6 @@ const cookieParser = require('cookie-parser');
 const bodyParser = require('body-parser');
 // Allows PUT/DELETE via forms
 const methodOverride = require('method-override')
-
 const app = express();
 
 const mongoose = require('mongoose');
@@ -25,6 +25,7 @@ mongoose.connect('mongodb://localhost/local', {
   useCreateIndex: true,
   useFindAndModify: false
 });
+
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
