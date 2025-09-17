@@ -111,7 +111,29 @@ app.post('/pets', upload.single('avatar'), (req, res) => {
         // Handle Errors
       });
   });
-
+  // PURCHASE
+  app.post('/pets/:id/purchase', (req, res) => {
+    console.log('Private key loaded:', process.env.PRIVATE_STRIPE_API_KEY ? 'YES' : 'NO');
+    console.log('Request body:', req.body);
+    
+    var stripe = require("stripe")(process.env.PRIVATE_STRIPE_API_KEY);
+    const token = req.body.stripeToken;
+    
+    const charge = stripe.charges.create({
+      amount: 999,
+      currency: 'usd',
+      description: 'Example charge',
+      source: token,
+    }).then((charge) => {
+      console.log('Charge successful:', charge.id);
+    // redirect to index view after successful payment
+      res.redirect('/');
+    }).catch((err) => {
+      console.log('Stripe error:', err.message);
+      console.log('Error type:', err.type);
+      res.redirect(`/pets/${req.params.id}?error=payment_failed`);
+    });
+  });
   // DELETE PET
   app.delete('/pets/:id', (req, res) => {
     Pet.findByIdAndRemove(req.params.id).exec((err, pet) => {
